@@ -104,5 +104,4 @@ def escrbirMapa(mapa, tam):
             print(f"{mapa[i][j]} ", end="")
         print()
 
-if __name__ == '__main__':
-    escogerDif()
+
