@@ -1,0 +1,6 @@
+Ivan;ivan;usuario
+Ismael;ismael;usuario
+IvanAdmin;admin;admin
+IsmaelAdmin;admin;admin
+admin;0001;admin
+Giovanny;gio001;usuario
