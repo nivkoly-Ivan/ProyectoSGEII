@@ -1,6 +1,6 @@
 from logs import Log
 from control_users import cargar_usuario
-from juego import *
+import juego
 
 def menu_inicio():
     while True:
@@ -34,7 +34,7 @@ def menu_principal(usuario,rol):
 
         if opt == "1":
             print("1")
-            #escoger_diff()
+            juego.escogerDif()
         elif opt == "2":
             print("2")
             #mostrar_estadisticas()
