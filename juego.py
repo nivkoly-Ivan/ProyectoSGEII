@@ -1,9 +1,13 @@
 import random as ra
+from logs import Log
+log = Log()
 
 #Requisito 002 - Ismael
 
 #Funcion para escoger una dificultad
-def escogerDif():
+#He añadido los logs donde nos pide el requisito 006 y pasamos usuario como parametro para los logs
+
+def escogerDif(usuario):
 
     try:
         #Escoger la dificultad
@@ -14,7 +18,7 @@ def escogerDif():
 
         respuesta = int(input())
 
-        juego(respuesta)
+        juego(respuesta,usuario)
 
     except ValueError as VE:
         print("Error de valor en juego.py")
@@ -24,10 +28,10 @@ def escogerDif():
         print(E)
 
 
-def juego(dif):
+def juego(dif,usuario):
 
     ha_ganado = False
-    #Segun la dif que se escoja, cambiará el valor de la variable *tam*
+    #Según la dif que se escoja, cambiará el valor de la variable *tam*
     if dif == 1:
         tam = 5
     elif dif == 2:
@@ -41,17 +45,20 @@ def juego(dif):
 
     tesoro = "💎"
 
+    log.escribir("PARTIDA",f"INICIO DE PARTIDA, DIFICULTAD : {dif} POR {usuario}")
     mapa = crearMapa(tam)
 
     escrbirMapa(mapa,tam)
-
+    contador_turnos = 0
     while not ha_ganado:
+        contador_turnos += 1
         print("=== Dime las coordenadas ===")
         fila = int(input("Fila: "))
         col = int(input("Columna: "))
 
         if fila < 0 or fila >= tam or col < 0 or col >= tam:
             print(f"Las coordenadas deben de estar entre el 0 y {tam - 1}")
+            log.escribir("INTENTO ILEGAL",f"COORDENADAS INEXISTENTES/FUERA DE RANGO | POR {usuario}")
         else:
             if fila == tesoroFila and col == tesoroCol:
                 ha_ganado = True
@@ -59,10 +66,12 @@ def juego(dif):
                 print(f"El tesoro 💎 estaba en {fila}, {col}")
                 mapa[tesoroFila][tesoroCol] = tesoro
                 escrbirMapa(mapa, tam)
+                log.escribir("INTENTO GANADO", f"FILA :{fila} COLUMNA: {col} | POR {usuario}")
+                log.escribir("PARTIDA GANADA",f"INTENTOS : {contador_turnos} | POR {usuario}")
             else:
                 mapa[fila][col] = "-"
                 escrbirMapa(mapa, tam)
-
+                log.escribir("INTENTO FALLIDO", f"FILA :{fila} COLUMNA: {col} | POR {usuario}")
 
 
 
