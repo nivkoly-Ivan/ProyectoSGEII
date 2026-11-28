@@ -2,6 +2,7 @@ from logs import Log
 from control_users import cargar_usuario
 import juego
 import sys
+log = Log()
 
 def menu_inicio():
     while True:
@@ -35,7 +36,7 @@ def menu_principal(usuario,rol):
 
         if opt == "1":
             print("1")
-            juego.escogerDif()
+            juego.escogerDif(usuario)
         elif opt == "2":
             print("2")
             #mostrar_estadisticas()
@@ -43,6 +44,7 @@ def menu_principal(usuario,rol):
             print("Cerrando sesión")
             menu_inicio()
         elif opt == "4":
+            log.escribir("INFO",f"{usuario} SALE DE LA APLICACIÓN")
             sys.exit()
         elif opt == "5" and rol == "admin":
             menu_administrador(usuario)
