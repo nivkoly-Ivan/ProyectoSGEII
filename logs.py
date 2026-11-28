@@ -9,7 +9,7 @@ class Log:
 
     def __init__(self):
         fecha = datetime.now().strftime("%Y%m%d")
-        self.ruta = f"log/{fecha}-iniciado.txt"
+        self.ruta = f"log/{fecha}-log.txt"
 
         if not os.path.exists("log"):
             os.mkdir("log")
