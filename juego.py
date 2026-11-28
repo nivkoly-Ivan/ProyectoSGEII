@@ -110,6 +110,17 @@ def juego(dif,usuario):
                 partida["intentos"].append((fila,col))
                 partida["num_intentos"] = contador_turnos
 
+                # Req 004 - Ismael
+                # Sistema de psitas, este se habilita cuando el num de intentos es mayor o igual a 3
+                if contador_turnos >= 3:
+                    print("=== Sistema de pistas ===")
+                    if (fila == tesoroFila or fila == tesoroFila + 1 or fila == tesoroFila - 1) and (col == tesoroCol or col == tesoroCol + 1 or col == tesoroCol - 1):
+                        print("Te has quedado cerca")
+                    else:
+                        print("Te has quedado lejos")
+
+
+
 
 
 #Funcion para crear el mapa
