@@ -2,10 +2,10 @@ import juego
 import matplotlib.pyplot as plt
 partidas = juego.partidas
 
-#Aqui vamos a mostrar las estadisticas del usuario
-#Lo he hecho pasando usuario en caso de que cierren sesion pero no la app, entonces al guardar partidas pueden ser de distintos usuarios
+#Aquí vamos a mostrar las estadísticas del usuario
+#Lo he hecho pasando usuario en caso de que cierren sesión, pero no la app, entonces al guardar partidas pueden ser de distintos usuarios
 
-def mostrar_estadisticas(usuario):
+def mostrar_estadisticas(usuario,rol):
     #TODAS LAS STATS
     winrate = 0.0
     abandonadas = 0
@@ -24,16 +24,21 @@ def mostrar_estadisticas(usuario):
     intentos_wins = 0
     por_usuario = {}
 
+    if rol == "admin":
+        titulo = "DE LA SESIÓN"
+    else:
+        titulo = f"DE {usuario}"
+
     #FOR RECORRIENDO LAS PARTIDAS
     for p in partidas:
-        #AQUI MIRAMOS LAS PARTIDAS POR USUARIO EN MEMORIA
+        #AQUÍ MIRAMOS LAS PARTIDAS POR USUARIO EN MEMORIA
         nombre = p["usuario"]
         if nombre in por_usuario:
             por_usuario[nombre] += 1
         else:
             por_usuario[nombre] = 1
 
-        if p['usuario'] == usuario:
+        if p['usuario'] == usuario or rol == "admin":
             partidas_jugadas += 1
             #PARTIDAS POR DIFICULTAD
             if p['dificultad'] == 1:
@@ -75,7 +80,7 @@ def mostrar_estadisticas(usuario):
         input("Pulsa Enter para volver al menú")
         return
 
-    #CALCULOS
+    #CÁLCULOS
     if partidas_acabadas > 0:
         winrate = ganadas / partidas_acabadas * 100
         media_intentos = total_intentos / partidas_acabadas
@@ -84,7 +89,7 @@ def mostrar_estadisticas(usuario):
 
     #MOSTRAMOS LAS STATS
     print("========================================")
-    print(f"ESTADÍSTICAS DE {usuario}")
+    print(f"ESTADÍSTICAS {titulo}")
     print("========================================")
     print(f"PARTIDAS INICIADAS: {partidas_jugadas}")
     print(f"PARTIDAS FINALIZADAS: {partidas_acabadas}")
@@ -100,24 +105,27 @@ def mostrar_estadisticas(usuario):
     print(f"  AVANZADA: {wins_hard}")
     print("========================================")
 
-    #AQUI DIBUJAMOS LOS GRAFICOS
-    dibujar_stats(ganadas, abandonadas, partidas_facil, partidas_medium, partidas_hard, usuario)
+    #AQUÍ DIBUJAMOS LOS GRÁFICOS
+    dibujar_stats(ganadas, abandonadas, partidas_facil, partidas_medium, partidas_hard, titulo)
     input("Pulsa Enter para volver al menú")
 
 
-def mostrar_partidas(usuario):
+def mostrar_partidas(usuario,rol):
     contador_partidas = 0
     print("========================================")
-    print(f"PARTIDAS DE {usuario}")
+    if rol == "admin":
+        print(f"PARTIDAS DE LA SESIÓN")
+    else:
+        print(f"PARTIDAS DE {usuario}")
     for p in partidas:
-        if p["usuario"] == usuario:
+        if p["usuario"] == usuario or rol == "admin":
             contador_partidas += 1
             print("========================================")
-            print(f"PARTIDA {contador_partidas}")
+            print(f"PARTIDA {contador_partidas} DE {p['usuario']}")
             print(f"DIFICULTAD: {p['dificultad']}")
             print(f"TAMAÑO: {p['tam']} * {p['tam']}")
             if p['estado'] != "Abandonada":
-                print(f"POSICION TESORO: FILA: {p['tesoro'][0]} COL: {p['tesoro'][1]}")
+                print(f"POSICIÓN TESORO: FILA: {p['tesoro'][0]} COL: {p['tesoro'][1]}")
             print(f"ESTADO: {p['estado']}")
             print(f"INTENTOS TOTALES: {p['num_intentos']}")
             print("TODOS LOS INTENTOS")
@@ -125,17 +133,19 @@ def mostrar_partidas(usuario):
             for fila, col in p["intentos"]:
                 intentos += 1
                 print(f"INTENTO {intentos}: FIL {fila}, COL: {col}")
-            #Faltan añadir las pistas
+            if len(p['pistas']) > 0:
+                for fila, col, pista in p["pistas"]:
+                    print(f"PISTA: {pista} FIL: {fila} COL: {col}")
             juego.escrbirMapa(p["mapa"],p["tam"])
             print("========================================")
 
-def dibujar_stats(ganadas, abandonadas, partidas_facil, partidas_medium, partidas_hard, usuario):
+def dibujar_stats(ganadas, abandonadas, partidas_facil, partidas_medium, partidas_hard, titulo):
     plt.bar(["Básica", "Media", "Avanzada"], [partidas_facil, partidas_medium, partidas_hard])
-    plt.title("Partidas por dificultad")
+    plt.title(f"Partidas por dificultad {titulo}")
     plt.ylabel("Partidas")
     plt.show()
 
     plt.bar(["Ganadas","Abandonadas"], [ganadas, abandonadas])
-    plt.title(f"Partidas totales de {usuario}")
+    plt.title(f"Partidas totales {titulo}")
     plt.ylabel("Partidas")
     plt.show()
