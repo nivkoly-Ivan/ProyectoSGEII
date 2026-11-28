@@ -24,15 +24,17 @@ def menu_principal(usuario,rol):
         print("-----------------------------------")
         print("2 } Mirar estadísticas de la sesión")
         print("-----------------------------------")
-        print("3 } Cambiar de sesión")
+        print("3 } Mirar historial de partidas de la sesión")
         print("-----------------------------------")
-        print("4 } Salir")
+        print("4 } Cambiar de sesión")
+        print("-----------------------------------")
+        print("5 } Salir")
         print("-----------------------------------")
         #Ismael no cambies a "Admin" con mayúscula, que en los txt está en minúscula
         if rol == "admin":
-            print("5 } Opciones de administrador")
+            print("6 } Opciones de administrador")
 
-        opt = input("Ponga su opcion:")
+        opt = input("Ponga su opción:")
 
         if opt == "1":
             print("1")
@@ -41,12 +43,15 @@ def menu_principal(usuario,rol):
             print("2")
             #mostrar_estadisticas()
         elif opt == "3":
+            print("3")
+            # mostrar_partidas()
+        elif opt == "4":
             print("Cerrando sesión")
             menu_inicio()
-        elif opt == "4":
+        elif opt == "5":
             log.escribir("INFO",f"{usuario} SALE DE LA APLICACIÓN")
             sys.exit()
-        elif opt == "5" and rol == "admin":
+        elif opt == "6" and rol == "admin":
             menu_administrador(usuario)
         else:
             print("Opcion no valida")
