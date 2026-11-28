@@ -55,8 +55,32 @@ def menu_principal(usuario,rol):
         elif opt == "6" and rol == "admin":
             menu_administrador(usuario)
         else:
-            print("Opcion no valida")
+            print("Opción no valida")
 
 
 def menu_administrador(usuario):
-    print(f"Bienvenido administrador {usuario}")
+    cheats = False
+    while True:
+        print("-----------------------------------")
+        print(f"Bienvenido administrador {usuario}")
+        print("-----------------------------------")
+        print("1 } Mirar estadísticas de la sesión como administrador")
+        print("-----------------------------------")
+        print("2 } Mirar historial de partidas de la sesión como administrador")
+        print("-----------------------------------")
+        print("3 } Activar cheats")
+        print("-----------------------------------")
+        print("4 } Salir")
+        print("-----------------------------------")
+        opt = input("Ponga su opción")
+        if opt == "1":
+            estadisticas.mostrar_estadisticas(usuario,)
+        elif opt == "2":
+            estadisticas.mostrar_partidas(usuario,)
+        elif opt == "3":
+            cheats = True
+            print("Ahora te salen los tesoros en las partidas")
+        elif opt == "4":
+            return
+        else:
+            print("Opcion no valida")
