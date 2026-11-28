@@ -6,7 +6,7 @@ def menu_inicio():
     while True:
         print("Bienvenido")
         print("-----------------------------------")
-        print("Debe iniciar sesion para jugar")
+        print("Debe iniciar sesión para jugar")
         print("-----------------------------------")
         usuario = input("Ponga su nombre de usuario:")
         clave = input("Ponga su clave:")
@@ -30,7 +30,7 @@ def menu_principal(usuario,rol):
         if rol == "Admin":
             print("5 } Opciones de administrador")
 
-        opt = input("Ponga su opcion:")
+        opt = input("Ponga su opción:")
 
         if opt == "1":
             print("1")
@@ -42,7 +42,7 @@ def menu_principal(usuario,rol):
             menu_inicio()
         elif opt == "4":
             break
-        elif opt == "5" and rol == "Admin":
+        elif opt == "5" and rol == "admin":
             menu_administrador(usuario)
         else:
             print("Opcion no valida")
