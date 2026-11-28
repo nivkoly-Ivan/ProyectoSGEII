@@ -19,7 +19,7 @@ def cargar_usuario(usuario, password):
                     log.escribir("INFO", f"Usuario {usuario} login correcto")
                     return menu.menu_principal(datos[0], datos[2])
 
-        # Saco el else que tenias depues del if para que si no lo encuentra recorra todo el fichero
+        # Saco el else que tenias despues del if para que si no lo encuentra recorra todo el fichero
         # Si lo recorre entero y no lo encuentra, ya fuera del for y fuera de todo
         # manda al usuario al menu inicio
         if not login_correcto:
@@ -30,8 +30,6 @@ def cargar_usuario(usuario, password):
         log.escribir("ERROR", f"No se ha encontrado el fichero: {FNFE}")
     except OSError as OSE:
         log.escribir("ERROR", f"No se pudo leer el archivo: {OSE}")
-    except ValueError as VE:
-        log.escribir("ERROR", f"Error en los valores: {VE}")
 
     #Todo en un try except para que no pete
 
