@@ -4,7 +4,7 @@ Juego por consola en Python en el que hay que encontrar un tesoro escondido en u
 
 Proyecto final de la **UD4 de Sistemas de Gestión Empresarial (SGE)** · DAM 2 · CIFP Virgen de Gracia (Puertollano) · Curso 2026/2027.
 
-**Autores:** Iván Hergueta Losa e Ismael.
+**Autores:** Iván Hergueta Losa e Ismael Muñoz Vico.
 
 ---
 
