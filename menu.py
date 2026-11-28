@@ -27,6 +27,9 @@ def menu_principal(usuario,rol):
         print("-----------------------------------")
         print("4 } Salir")
         print("-----------------------------------")
+        #Ismael no cambies a "Admin" con mayúscula, que en los txt está en minúscula
+        if rol == "admin":
+            print("5 } Opciones de administrador")
 
         opt = input("Ponga su opcion:")
 
@@ -41,9 +44,7 @@ def menu_principal(usuario,rol):
             menu_inicio()
         elif opt == "4":
             sys.exit()
-        if rol == "Admin":
-            print("5 } Opciones de administrador")
-        elif opt == "5" and rol == "Admin":
+        elif opt == "5" and rol == "admin":
             menu_administrador(usuario)
         else:
             print("Opcion no valida")
