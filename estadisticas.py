@@ -116,7 +116,8 @@ def mostrar_partidas(usuario):
             print(f"PARTIDA {contador_partidas}")
             print(f"DIFICULTAD: {p['dificultad']}")
             print(f"TAMAÑO: {p['tam']} * {p['tam']}")
-            print(f"POSICION TESORO: FILA: {p['tesoro'][0]} COL: {p['tesoro'][1]}")
+            if p['estado'] != "Abandonada":
+                print(f"POSICION TESORO: FILA: {p['tesoro'][0]} COL: {p['tesoro'][1]}")
             print(f"ESTADO: {p['estado']}")
             print(f"INTENTOS TOTALES: {p['num_intentos']}")
             print("TODOS LOS INTENTOS")
