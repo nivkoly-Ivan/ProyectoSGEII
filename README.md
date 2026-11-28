@@ -236,4 +236,4 @@ ProyectoSGEII/
 
 ---
 
-<p align="center">Hecho con python por Iván e Ismael</p>
+<p align="center">Hecho con Python por Iván e Ismael</p>
