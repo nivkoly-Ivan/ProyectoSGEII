@@ -1,6 +1,7 @@
 from logs import Log
 from control_users import cargar_usuario
 import juego
+import estadisticas
 import sys
 log = Log()
 
@@ -41,10 +42,10 @@ def menu_principal(usuario,rol):
             juego.escogerDif(usuario)
         elif opt == "2":
             print("2")
-            #mostrar_estadisticas()
+            estadisticas.mostrar_estadisticas(usuario)
         elif opt == "3":
             print("3")
-            # mostrar_partidas()
+            estadisticas.mostrar_partidas(usuario)
         elif opt == "4":
             print("Cerrando sesión")
             menu_inicio()
