@@ -1,9 +1,7 @@
 import random as ra
 import time
-
 from logs import Log
 log = Log()
-
 #Creamos un diccionario de partidas, asi guardar las estadisticas y las partidas de la sesion con lo que necesitamos de estadisticas
 partidas = []
 #Requisito 002 - Ismael
@@ -12,7 +10,7 @@ partidas = []
 #He añadido los logs donde nos pide el requisito 006 y pasamos usuario como parametro para los logs
 #Añado la opción de abandonar y añado variables para el "historial de partidas" y "estadisticas de la sesión"
 
-def escogerDif(usuario):
+def escoger_dif(usuario,cheats):
 
     try:
         #Escoger la dificultad
@@ -23,7 +21,7 @@ def escogerDif(usuario):
 
         respuesta = int(input())
 
-        juego(respuesta,usuario)
+        juego(respuesta,usuario,cheats)
 
     except ValueError as VE:
         print("Error de valor en juego.py")
@@ -33,7 +31,7 @@ def escogerDif(usuario):
         print(E)
 
 
-def juego(dif,usuario):
+def juego(dif,usuario,cheats):
 
     ha_abandonado = False
     ha_ganado = False
@@ -69,6 +67,8 @@ def juego(dif,usuario):
         "mapa": mapa
     }
     partidas.append(partida)
+    if cheats:
+        mapa[tesoroFila][tesoroCol] = tesoro
     escrbirMapa(mapa,tam)
 
     while not ha_ganado and not ha_abandonado:
@@ -115,9 +115,13 @@ def juego(dif,usuario):
                 if contador_turnos >= 3:
                     print("=== Sistema de pistas ===")
                     if (fila == tesoroFila or fila == tesoroFila + 1 or fila == tesoroFila - 1) and (col == tesoroCol or col == tesoroCol + 1 or col == tesoroCol - 1):
-                        print("Te has quedado cerca")
+                        pista = "Te has quedado cerca"
+                        print(pista)
+                        partida['pistas'].append((fila,col,pista))
                     else:
-                        print("Te has quedado lejos")
+                        pista = "Te has quedado lejos"
+                        print(pista)
+                        partida['pistas'].append((fila, col, pista))
 
 
 

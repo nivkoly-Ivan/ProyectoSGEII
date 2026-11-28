@@ -4,8 +4,11 @@ import juego
 import estadisticas
 import sys
 log = Log()
+cheats = False
 
 def menu_inicio():
+    global cheats
+    cheats = False
     while True:
         print("Bienvenido")
         print("-----------------------------------")
@@ -17,6 +20,7 @@ def menu_inicio():
 
 
 def menu_principal(usuario,rol):
+    global cheats
     while True:
         print("-----------------------------------")
         print("Bienvenido")
@@ -39,13 +43,13 @@ def menu_principal(usuario,rol):
 
         if opt == "1":
             print("1")
-            juego.escogerDif(usuario)
+            juego.escoger_dif(usuario,cheats)
         elif opt == "2":
             print("2")
-            estadisticas.mostrar_estadisticas(usuario)
+            estadisticas.mostrar_estadisticas(usuario,rol)
         elif opt == "3":
             print("3")
-            estadisticas.mostrar_partidas(usuario)
+            estadisticas.mostrar_partidas(usuario,rol)
         elif opt == "4":
             print("Cerrando sesión")
             menu_inicio()
@@ -53,13 +57,13 @@ def menu_principal(usuario,rol):
             log.escribir("INFO",f"{usuario} SALE DE LA APLICACIÓN")
             sys.exit()
         elif opt == "6" and rol == "admin":
-            menu_administrador(usuario)
+            menu_administrador(usuario,rol)
         else:
             print("Opción no valida")
 
 
-def menu_administrador(usuario):
-    cheats = False
+def menu_administrador(usuario,rol):
+    global cheats
     while True:
         print("-----------------------------------")
         print(f"Bienvenido administrador {usuario}")
@@ -74,9 +78,9 @@ def menu_administrador(usuario):
         print("-----------------------------------")
         opt = input("Ponga su opción")
         if opt == "1":
-            estadisticas.mostrar_estadisticas(usuario,)
+            estadisticas.mostrar_estadisticas(usuario,rol)
         elif opt == "2":
-            estadisticas.mostrar_partidas(usuario,)
+            estadisticas.mostrar_partidas(usuario,rol)
         elif opt == "3":
             cheats = True
             print("Ahora te salen los tesoros en las partidas")
